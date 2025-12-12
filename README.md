@@ -110,12 +110,28 @@ Features include:
 
 ## 🚀 How to Run
 
-### **Prerequisites**
-- Java 8+  
-- JavaFX SDK  
+---
 
-### **Compile**
-```bash
-javac --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls huffman/**/*.java
+## 📌 Prerequisites
+
+- **Java 8 or higher** (Java 11+ recommended)  
+- **JavaFX SDK installed** (bundled with many recent JDKs)  
+- **Any Java IDE**: IntelliJ IDEA, Eclipse, NetBeans, or VS Code with Java extensions  
+
+---
+
+## 🖥️ Running in an IDE
+
+### 🔹 IntelliJ IDEA
+1. Open the project in IntelliJ IDEA  
+2. Navigate to: `src/huffman/ui/HuffmanTreeVisualizer.java`  
+3. Right-click → **Run 'HuffmanTreeVisualizer.main()'**  
+4. If JavaFX isn’t configured, IntelliJ will automatically prompt you to add the module path  
+
+## ⚡ Quick Start
+
+Just open the project in your favorite IDE and run:
+
+
 
 
