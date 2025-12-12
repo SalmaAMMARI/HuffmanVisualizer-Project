@@ -131,6 +131,10 @@ Features include:
 ## ⚡ Quick Start
 
 Just open the project in your favorite IDE and run.
+> ⚠️ **Important Note**  
+> If you're using a small screen or a low-resolution display, you may need to **scroll or pan inside the visualization area** to view all the tree-construction steps.  
+>  
+> The intermediate steps are displayed toward the **center of the UI**, so on smaller displays they may not appear fully visible unless you navigate within the visualization panel.
 
 
 
