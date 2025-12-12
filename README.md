@@ -1,217 +1,121 @@
-# HuffmanVisualizer-Project
-Huffman Coding Algorithm - Visualizer Project
-📖 Overview
-Huffman Coding is a lossless data compression algorithm that assigns variable-length codes to input characters, with shorter codes assigned to more frequent characters and longer codes to less frequent ones. This project implements a complete Huffman coding system with a graphical visualization interface in JavaFX.
+# HuffmanVisualizer Project
 
-🎯 Project Concept
-The Huffman algorithm works by:
+A visual and interactive implementation of the **Huffman Coding Algorithm** using **JavaFX**.
 
-Frequency Analysis: Counting the frequency of each character in the input text
+---
 
-Tree Construction: Building a binary tree where each leaf represents a character and its frequency
+## 📖 Overview
 
-Code Generation: Traversing the tree to assign binary codes (0 for left, 1 for right)
+Huffman Coding is a **lossless compression algorithm** that assigns **shorter codes to frequent characters** and **longer codes to less frequent ones**.  
+This project implements the full algorithm *and* provides a **graphical visualization** of each step.
 
-Compression: Replacing characters with their Huffman codes
+---
 
-Decompression: Using the tree to decode the binary string back to original text
+## 🎯 Project Concept
 
-This project not only implements the algorithm but also provides step-by-step visualization of the tree construction process.
+The algorithm works through:
 
-📁 Project Structure
-text
-huffman/
-├── algorithm/          # Core algorithm implementations
-│   ├── FrequencyCounter.java
-│   ├── TextToListOfCharacter.java
-│   ├── CodeGenerator.java
-│   ├── Compressor.java
-│   ├── Decompressor.java
-│   ├── TreeBuilder.java
-│   ├── SortedNodesCreator.java
-│   ├── MergeSort.java
-│   ├── Dfs.java
-│   └── Test.java
-├── model/             # Data models
-│   ├── HuffmanTree.java
-│   └── HuffmanNode.java
-└── ui/                # User interface
-    └── HuffmanTreeVisualizer.java
-🏗️ Model Classes
-1. HuffmanNode.java
-The fundamental building block representing a node in the Huffman tree:
+1. **Frequency Analysis** – Count the frequency of each character.  
+2. **Tree Construction** – Build a binary tree where leaves represent characters.  
+3. **Code Generation** – Traverse the tree (0 = left, 1 = right).  
+4. **Compression** – Replace text characters with Huffman codes.  
+5. **Decompression** – Decode binary data using the reconstructed tree.
 
-Attributes:
+The visualizer shows each construction step in real-time.
 
-character: The character stored in this node (null for internal nodes)
+---
 
-frequency: The frequency/count of the character
+## 🏗️ Model Classes
 
-left: Reference to left child node
+### **1. HuffmanNode.java**
+Represents a single node in the Huffman tree.
 
-right: Reference to right child node
+**Attributes**
+- `character` – Stored character (null for internal nodes)  
+- `frequency` – How often the character appears  
+- `left`, `right` – Child nodes  
 
-Key Methods:
+**Key Methods**
+- `isLeaf()` – True if it has no children  
+- `toString()` – Debug printing  
 
-isLeaf(): Returns true if node has no children
+---
 
-toString(): String representation for debugging
+### **2. HuffmanTree.java**
+Represents the entire tree structure.
 
-2. HuffmanTree.java
-Represents the complete Huffman tree structure:
+**Attributes**
+- `root` – Root node of the tree  
+- `constructionSteps` – Saved snapshots of tree-building  
+- `code` – Map of character → Huffman code  
 
-Attributes:
+**Key Methods**
+- `generateMycode()` – Builds all codes  
+- `getConstructionSteps()` – Access construction history  
+- `addConstructionSteps()` – Save a step  
 
-root: The root node of the Huffman tree
+---
 
-constructionSteps: List of intermediate states during tree construction
+## 🔧 Algorithm Classes
 
-code: HashMap mapping characters to their Huffman codes
+### **1. FrequencyCounter.java**
+Counts character frequencies.  
+- `getFrequency(List<Character>)` → HashMap<Character, Integer>
 
-Key Methods:
+### **2. TextToListOfCharacter.java**
+Converts a string into a character list.  
+- `TextFormatModifier(String)` → List<Character>
 
-generateMycode(): Generates Huffman codes for all characters
+### **3. SortedNodesCreator.java**
+Builds a sorted node list.  
+- `sort(String)` → sorted List<HuffmanNode>
 
-getConstructionSteps(): Returns all intermediate tree states
+### **4. MergeSort.java**
+Sorts nodes by frequency using merge sort.  
+- `mergeSort(List<HuffmanNode>)`  
+- `merge()`
 
-addConstructionSteps(): Records a construction step
+### **5. TreeBuilder.java**
+Builds the Huffman tree.  
+- `buildHuffmanTree(String)` → HuffmanTree
 
-🔧 Algorithm Classes
-1. FrequencyCounter.java
-Counts character frequencies in input text:
+### **6. CodeGenerator.java**
+Generates Huffman binary codes.  
+- `generateCode()` – DFS traversal
 
-getFrequency(List<Character> text): Returns HashMap<Character, Integer> with character frequencies
+### **7. Compressor.java**
+Encodes a text string.  
+- `compress(String, HuffmanTree)` → binary string
 
-2. TextToListOfCharacter.java
-Converts input string to list of characters:
+### **8. Decompressor.java**
+Decodes binary text.  
+- `decompress(String, HuffmanTree)` → original text
 
-TextFormatModifier(String text): Converts string to List<Character>
+---
 
-3. SortedNodesCreator.java
-Creates sorted list of HuffmanNode objects:
+## 🎨 User Interface (JavaFX)
 
-sort(String initial_text): Returns sorted list of nodes by frequency
+### **HuffmanTreeVisualizer.java**
+Features include:
 
-4. MergeSort.java
-Implements merge sort algorithm for sorting nodes:
+- Load text files  
+- Step-by-step tree construction  
+- Animated path tracing  
+- Auto-play mode  
+- Compression statistics  
+- Code table view  
+- Export encoded text  
 
-mergeSort(List<HuffmanNode> A): Sorts nodes by frequency ascending
+---
 
-merge(): Merges two sorted lists
+## 🚀 How to Run
 
-5. TreeBuilder.java
-Core algorithm for building Huffman tree:
+### **Prerequisites**
+- Java 8+  
+- JavaFX SDK  
 
-buildHuffmanTree(String text): Constructs complete Huffman tree with step tracking
-
-6. CodeGenerator.java
-Generates Huffman codes from tree:
-
-generateCode(): Recursively traverses tree to assign binary codes
-
-7. Compressor.java
-Compresses text using generated Huffman codes:
-
-compress(String text, HuffmanTree tree): Converts text to binary string
-
-8. Decompressor.java
-Decompresses encoded text:
-
-decompress(String encodedText, HuffmanTree tree): Converts binary back to text
-
-🎨 User Interface (JavaFX)
-HuffmanTreeVisualizer.java
-A comprehensive visualization tool with features:
-
-File Loading: Load text files for compression
-
-Step-by-Step Visualization: Watch the tree construction process
-
-Path Animation: Visualize encoding paths for specific characters
-
-Auto-Play: Automatic demonstration of all character encodings
-
-Compression Statistics: Display compression ratios and savings
-
-Code Table: Show complete character-to-code mappings
-
-Export Options: Copy encoded text to clipboard
-
-🚀 How to Run
-Prerequisites
-Java 8 or higher
-
-JavaFX SDK
-
-Compilation and Execution
-bash
-# Compile all Java files
+### **Compile**
+```bash
 javac --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls huffman/**/*.java
 
-# Run the visualizer
-java --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls huffman.ui.HuffmanTreeVisualizer
 
-# Or run the test program
-java huffman.algorithm.Test
-📊 Example Usage
-Load a text file or use default text
-
-Observe tree construction step by step
-
-View final Huffman tree with character codes
-
-Select characters to see their encoding paths
-
-View compression statistics and encoded text
-
-Export results for use in other applications
-
-🎯 Key Features
-Educational Visualization: Perfect for understanding Huffman algorithm
-
-Interactive Learning: Step-through construction and path tracing
-
-Real Compression: Actual encoding/decoding implementation
-
-File Support: Load and process any text file
-
-Performance Stats: Compression ratio calculations
-
-Professional UI: Clean, modern JavaFX interface
-
-📈 Algorithm Complexity
-Time Complexity: O(n log n) for tree construction
-
-Space Complexity: O(n) for storing frequency table and tree
-
-Optimality: Produces optimal prefix codes for given frequencies
-
-🔍 Learning Outcomes
-This project demonstrates:
-
-Tree data structures and their applications
-
-Priority queue concepts through sorted lists
-
-Recursive algorithms for tree traversal
-
-File I/O operations in Java
-
-JavaFX GUI development
-
-Algorithm visualization techniques
-
-Lossless compression principles
-
-🤝 Contributing
-Feel free to fork this project and submit pull requests with:
-
-Additional visualization features
-
-Performance optimizations
-
-Support for binary file compression
-
-Multilingual character support
-
-Web-based interface
