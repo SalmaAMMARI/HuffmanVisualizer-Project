@@ -130,7 +130,7 @@ Features include:
 
 ## ⚡ Quick Start
 
-Just open the project in your favorite IDE and run:
+Just open the project in your favorite IDE and run.
 
 
 
