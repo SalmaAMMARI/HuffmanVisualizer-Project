@@ -1,38 +1,28 @@
-name: Build and SonarCloud Analysis
-
+name: Build
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+    branches: [main]
 jobs:
-  build:
+  sonarqube:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Show repository structure (DEBUG)
-        run: ls -R
-
-      - name: Set up JDK 17
+      
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: temurin
-          java-version: '17'
-
-      # ⬇️ À CORRIGER APRÈS LE PREMIER RUN
+          java-version: '11'
+          distribution: 'temurin'
+      
       - name: Build with Maven
         run: mvn clean verify
-        working-directory: CHANGE_ME
-
+        working-directory: .  # ← IMPORTANT : spécifie le dossier
+      
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarqube-scan-action@v6
         with:
-          projectBaseDir: CHANGE_ME
+          projectBaseDir: .  # ← IMPORTANT : dossier du projet
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
