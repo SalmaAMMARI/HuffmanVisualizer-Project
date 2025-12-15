@@ -16,16 +16,23 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Show repository structure (DEBUG)
+        run: ls -R
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: '17'
 
+      # ⬇️ À CORRIGER APRÈS LE PREMIER RUN
       - name: Build with Maven
         run: mvn clean verify
+        working-directory: CHANGE_ME
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          projectBaseDir: CHANGE_ME
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
