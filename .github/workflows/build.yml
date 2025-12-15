@@ -26,9 +26,10 @@ jobs:
 
       # Build and run tests with Maven + SonarCloud scan
       - name: Build and SonarCloud Scan
-        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-             -Dsonar.projectKey=SalmaAMMARI_HuffmanVisualizer-Project \
-             -Dsonar.organization=salmaammari \
-             -Dsonar.host.url=https://sonarcloud.io \
-             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=SalmaAMMARI_HuffmanVisualizer-Project \
+            -Dsonar.organization=salmaammari \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         working-directory: ./huffman_project/demo2
