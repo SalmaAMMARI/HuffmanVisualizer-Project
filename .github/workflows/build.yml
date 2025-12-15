@@ -21,7 +21,7 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        run: npm ci  # ou npm install si pas de package-lock.json
+        run: npm install  # ou npm install si pas de package-lock.json
       
       # Optionnel : lancez vos tests pour générer un rapport de couverture
       - name: Run tests
