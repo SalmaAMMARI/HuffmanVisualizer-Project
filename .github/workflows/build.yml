@@ -1,31 +1,23 @@
 name: Build
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [main]
 jobs:
   sonarqube:
-    name: SonarQube
-    runs-on: ubuntu-latest  # ← CHANGÉ ICI
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      # AJOUTEZ CES ÉTAPES POUR JS/TS :
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
         with:
-          node-version: '18'
+          java-version: '11'
       
-      - name: Install dependencies
-        run: npm install  # ou npm install si pas de package-lock.json
-      
-      # Optionnel : lancez vos tests pour générer un rapport de couverture
-      - name: Run tests
-        run: npm test  # si vous avez des tests
+      # Pour Maven :
+      - name: Build with Maven
+        run: mvn clean compile
       
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
