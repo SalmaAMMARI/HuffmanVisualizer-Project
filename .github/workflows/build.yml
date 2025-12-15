@@ -24,6 +24,7 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean verify
+        working-directory: HuffmanVisualizer-Project
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
